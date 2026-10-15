@@ -368,7 +368,7 @@ class NewDataProcessor:
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-    proc = NewDataProcessor('postgresql+psycopg2://postgres:456258@localhost:5432/crypto_data', freq='30s')
+    proc = NewDataProcessor(os.getenv('DATABASE_URL', 'postgresql+psycopg2://postgres@localhost:5432/crypto_data'), freq='30s')
     df = proc.get_processed_data('2025-01-20 00:00:00', '2025-01-22 00:00:00')
     if not df.empty:
         print('示例衍生特征前5行:')

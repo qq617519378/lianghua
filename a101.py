@@ -16,6 +16,7 @@
 """
 #from config import SCALER_PATH_DEFAULT
 # 然后在代码里直接用 SCALER_PATH_DEFAULT
+import os
 import config
 
 import logging
@@ -59,10 +60,11 @@ EXCLUDE_COLS = {
     "total_mempool_value", "avg_mempool_fee_rate",
 }
 DB_HOST, DB_PORT, DB_NAME = "localhost", 5432, "crypto_data"
-DB_USER, DB_PASS = "postgres", "456258"
+DB_USER = os.getenv("DB_USER", "postgres")
+DB_PASS = os.getenv("DB_PASS", "")
 MARKET_TABLE = "crypto_data"
 CHAIN_TABLE = "blockchain_features_utc"
-DATABASE_URL_FALLBACK = f"postgresql+psycopg2://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+DATABASE_URL_FALLBACK = os.getenv("DATABASE_URL", f"postgresql+psycopg2://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}")
 
 logger_a101 = logging.getLogger("TradingSystem.A101Preprocessor")
 

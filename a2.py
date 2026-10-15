@@ -18,6 +18,7 @@ MODULE 2: 混合神经微分方程 (Hybrid Neural ODE) + 小波分解 - 调用�
 依赖:
   pip install torch torchdiffeq pytorch-wavelets numpy pandas scikit-learn tqdm
 """
+import os
 from core_utils import EMA
 import warnings
 warnings.filterwarnings("ignore", category=FutureWarning)
@@ -490,7 +491,7 @@ def main():
 
     # 1. 调用模块1, 加载并预处理数据
     from a1 import NewDataProcessor
-    connection_str = "postgresql+psycopg2://postgres:456258@localhost:5432/crypto_data"
+    connection_str = os.getenv("DATABASE_URL", "postgresql+psycopg2://postgres@localhost:5432/crypto_data")
     processor = NewDataProcessor(connection_str, freq="30s")
 
 

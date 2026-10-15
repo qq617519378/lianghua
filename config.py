@@ -1,4 +1,5 @@
 # =======================  config.py  =======================
+import os
 from pathlib import Path
 import torch
 import pandas as pd
@@ -18,8 +19,9 @@ USE_CUDNN_BENCHMARK = True
 
 # ── 数据库连接 ─────────────────────────────────────────────
 DB_HOST, DB_PORT, DB_NAME = "localhost", 5432, "crypto_data"
-DB_USER, DB_PASS = "postgres", "456258"
-DATABASE_URL = f"postgresql+psycopg2://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+DB_USER = os.getenv("DB_USER", "postgres")
+DB_PASS = os.getenv("DB_PASS", "")
+DATABASE_URL = os.getenv("DATABASE_URL", f"postgresql+psycopg2://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}")
 DB_ENGINE_POOL_SIZE, DB_ENGINE_MAX_OVERFLOW = 5, 10
 DB_MARKET_DATA_TABLE, DB_CHAIN_FEATURES_TABLE = "crypto_data", "blockchain_features_utc"
 DB_PREDICTION_LOG_TABLE = "prediction_log"
