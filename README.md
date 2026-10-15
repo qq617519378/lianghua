@@ -6,6 +6,8 @@ A research project that predicts BTC/USDT short-horizon price moves from market 
 
 ## Architecture
 
+![Architecture](docs/architecture.png)
+
 ```
 PostgreSQL (market + on-chain features)
         │
